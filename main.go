@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"strings"
 
 	"github.com/elazarl/goproxy"
 )
@@ -38,11 +39,17 @@ func main() {
 }
 
 func isLocalRequest(req *http.Request, ctx *goproxy.ProxyCtx) bool {
-	host, _, err := net.SplitHostPort(req.Host)
+	host := req.Host
 
-	if err != nil {
-		log.Printf("Failed to parse '%s': %v\n", host, err)
-		return true
+	if strings.Contains(host, ":") {
+		splitHost, _, err := net.SplitHostPort(host)
+
+		if err != nil {
+			log.Printf("Failed to parse '%s': %v\n", host, err)
+			return true
+		}
+
+		host = splitHost
 	}
 
 	addrs, err := net.LookupIP(host)
