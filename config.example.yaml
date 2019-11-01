@@ -1,0 +1,5 @@
+allowGlobalUnicastOnly: true
+blockPrivateAddressV4: true
+blacklist:
+  - addr: "40.115.176.77"
+    portWhitelist: [80, 443]
