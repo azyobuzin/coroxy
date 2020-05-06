@@ -1,6 +1,11 @@
 # Coroxy
 A simple HTTP proxy server to prevent attacks to your private network.
 
+## Usage
+
+1. Prepare `config.yaml`
+2. `docker run -p 127.0.0.1:8080:8080 -v $(pwd):/etc/coroxy azyobuzin/coroxy -config /etc/coroxy/config.yaml`
+
 ## Configuration Example
 ```yaml
 # Blocks loopback and multicast
